@@ -55,7 +55,7 @@ app.post("/api/shorturl", function(req, res) {
   // Parsing bodyUrl to just be the host name for dns to look up
   const https = dns.lookup(urlParser.parse(bodyUrl).hostname,
   function(err, validAddress) {
-    if (err) {
+    if (!validAddress) {
       res.json({ error: "Invalid URL"})
     } else {
       const url = new Url({ url: bodyUrl })
